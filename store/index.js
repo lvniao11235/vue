@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     strict:true,
     state:{
-        skin: "skin-red",
+        skin: "skin-blue",
         colors:['red', 'green', 'blue']
     },
     mutations:{
