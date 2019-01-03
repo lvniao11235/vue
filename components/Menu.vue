@@ -1,29 +1,34 @@
 <template>
     <div class="lv-menu">
-        <MenuItem v-for="item in items" :key="item.Name" :item="item">
-        </MenuItem>
+        <MenuItem v-for="item in items" :key="item.Name" :item="item"></MenuItem>
     </div>
 </template>
 
 <script>
-    import Axios from "axios";
+    //import Axios from "axios";
     import MenuItem from "./MenuItem";
 
     export default {
         name:"Menu",
         data:function(){
             return{
-                items:{}
+                items:[
+                    {id:1, name: "aa", clazz:"fa fa-cog"},
+                    {id:2, name: "bb", clazz:"fa fa-user-circle"},
+                    {id:3, name: "cc", clazz:"fa fa-info-circle"}
+                ]
             }
         },
         components:{
             MenuItem
         },
         created(){
-            var _this = this;
+            //var _this = this;
+            /*
             Axios.get(this.$store.state.url + 'api/data/menus').then(function(res){
                 _this.items = res.data;
             });
+            */
         }
     }
 </script>

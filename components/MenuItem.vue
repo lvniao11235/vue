@@ -1,10 +1,10 @@
 <template>
-    <div class="lv-menu-item">
+    <div class="lv-menu-item" @mouseover="showTitle" @mouseout="hideTitle" :class="{'selected':selected, 'lv-show':bflod}">
         <div class="lv-menu-title" :class="{'selected':selected}" 
-        @click="selectedMenu" @mouseover="showTitle" @mouseout="hideTitle">
+        @click="selectedMenu">
             <input type="hidden" v-model="item.id"/>
             <span class="lv-menu-highlight"></span>
-            <span class="lv-menu-icon fa fa-cog"></span>
+            <span class="lv-menu-icon " :class="item.clazz"></span>
             <span class="lv-menu-text" v-show="bflod">{{item.name}}</span>
         </div>
         <div class="lv-menu-content">
@@ -21,18 +21,15 @@
             return{
                 show:false,
             }
-        }
+        },
         methods:{
             selectedMenu(){
                 this.$store.commit("selectedMenuChange", this.item.id);
             },
-            showPanel(){
-                if(this.bfload()){
-                    this.show = true;
-                }
-                
+            showTitle(){
+                this.show = true;
             },
-            hidePanel(){
+            hideTitle(){
                 this.show = false;
             }
         },
@@ -41,7 +38,8 @@
                 return this.$store.state.selectedMenu == this.item.id;
             },
             bflod(){
-                return !this.$store.state.bflod;
+
+                return this.show;
             }
         }
     }
@@ -54,7 +52,7 @@
 
     .lv-menu-title{
         width:100%;
-        font-size:30px;
+        font-size:0px;
         color:white;
         height:40px;
         
@@ -67,6 +65,7 @@
         height:40px;
         line-height:40px;
         vertical-align:middle;
+        font-size:30px;
     }
 
     .lv-menu-title .lv-menu-highlight{
@@ -84,9 +83,21 @@
     }
 
     .lv-menu-title .lv-menu-text{
-        width:calc(100% - 40px -3px);
+        width:calc(100% - 43px);
         text-align:left;
     }
+
+    .lv-menu-item.lv-show.selected{
+        height:40px;
+    }
     
+    .lv-menu-item.lv-show .lv-menu-title,
+    .lv-menu-title.selected {
+        position:absolute;
+        width:120px;
+        z-index:5;
+        background-color:red;
+    }
+
     
 </style>
