@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import "font-awesome/css/font-awesome.min.css";
 import Head from './components/Head';
 import Side from './components/Side';
 import Content from './components/Content';
@@ -32,6 +33,15 @@ export default {
         this.$store.commit("updateSkin", newskin);
       }
     }
+  },
+  created(){
+    this.$store.commit("layoutChange", document.body.clientWidth);
+  },
+  mounted(){
+    var _this = this;
+    window.onresize = function(){
+      _this.$store.commit("layoutChange", document.body.clientWidth);
+    }
   }
 }
 </script>
@@ -51,29 +61,18 @@ export default {
     width:100%;
     height:100%;
   }
-  .lv-layout-head{
-    width:100%;
-    height:50px;
-    background-color:red;
+  
+  .lv-layout-side{
+    float:left;
   }
-  .lv-layout-side, .lv-layout-content{
-    display:inline-block;
-    height:calc(100% - 50px);
+
+  .lv-layout-content{
+    float:right;
   }
 
   .lv-layout-side, .lv-layout-content, .lv-layout-head{
     font-size:14px;
     z-index:3;
-  }
-
-  .lv-layout-side{
-    width:230px;
-    background-color:green;
-  }
-
-  .lv-layout-content{
-    width:calc(100% - 230px);
-    background-color:blue;
   }
 
   .lv-layout-head.skin-blue{
@@ -82,6 +81,10 @@ export default {
 
   .lv-logo.skin-blue{
     background-color:#367fa9;
+  }
+
+  .lv-layout-side.skin-blue{
+    background-color:#222d32;
   }
 
 </style>

@@ -28,13 +28,13 @@ export default {
     .lv-head-item-text{
     }
     .lv-head-item-panel{
-        width:100px;
-        height:100px;
+        width:200px;
+        height:200px;
         background-color:#C1C0C5;
         z-index:5;
         position:relative;
-        margin-left:-70px;
-        margin-top:17px;
+        margin-left:-170px;
+        margin-top:10px;
     }
 
     .lv-head-item-panel:before{
@@ -43,23 +43,10 @@ export default {
         right:2px;
         position:absolute;
         content:"";
-        margin-top:-30px;
-        border-top:15px solid transparent;
-        border-left:10px solid transparent;
-        border-right:10px solid transparent;
-        border-bottom:15px solid #C1C0C5;
-    }
-
-    .lv-head-item-panel:after{
-        display:block;
-        top:3px;
-        right:2px;
-        position:absolute;
-        content:"";
-        margin-top:-30px;
-        border-top:15px solid transparent;
-        border-left:10px solid transparent;
-        border-right:10px solid transparent;
-        border-bottom:15px solid #C1C0C5;
+        margin-top:-20px;
+        border-top:10px solid transparent;
+        border-left:5px solid transparent;
+        border-right:5px solid transparent;
+        border-bottom:10px solid #C1C0C5;
     }
 </style>

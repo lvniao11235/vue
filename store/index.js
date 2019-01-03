@@ -7,7 +7,11 @@ export default new Vuex.Store({
     strict:true,
     state:{
         skin: "skin-blue",
-        colors:['red', 'green', 'blue']
+        colors:['red', 'green', 'blue'],
+        bflod: false,
+        blayout: window.innerWidth,
+        url: 'https://localhost:44367/',
+        selectedMenu:-1,
     },
     mutations:{
         updateSkin(currentState, newskin){
@@ -18,6 +22,15 @@ export default new Vuex.Store({
                     currentState.skin = newskin;
                 }
             }
+        },
+        foldChange(currentState){
+            currentState.bflod = !currentState.bflod;
+        },
+        layoutChange(currentState, newlayout){
+            currentState.blayout = newlayout;
+        },
+        selectedMenuChange(currentState, newvalue){
+            currentState.selectedMenu = newvalue;
         }
     }
 });
