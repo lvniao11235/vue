@@ -1,6 +1,6 @@
 <template>
     <div class="lv-layout-side" :style="{'width': width + 'px', 'height': height + 'px'}" :class="skin">
-        <Menu></Menu>
+        <Menu :skin="skin"></Menu>
     </div>
 </template>
 
