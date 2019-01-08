@@ -1,106 +1,96 @@
 <template>
-    <div class="lv-menu-item" :style="{'width':titleWidth, 'height':itemHeight}"
-        :class="{'selected':selected, 'lv-flod':bflod, 'lv-show':show}"
-        @mouseover="showTitle" @mouseout="hideTitle">
-        <div class="lv-menu-title" 
-            :class="{'selected':selected, 'lv-flod':bflod, 'lv-show':show}" 
-            :style="{'width':titleWidth}"
-            @click="selectedMenu"  >
+    <div class="lv-menu-item" :class="{selected}">
+        <div class="lv-menu-title" @click="selectedItem">
             <input type="hidden" v-model="item.id"/>
             <span class="lv-menu-highlight"></span>
-            <span class="lv-menu-icon " :class="item.clazz" 
-                >
+            <span class="lv-menu-icon " :class="item.clazz">
             </span>
             <span class="lv-menu-text">{{item.name}}</span>
+            <span class="lv-menu-collapse fa"
+                v-show="top"
+                :class="collapse"
+                @click="collapseClick"></span>
         </div>
         <div class="lv-menu-content">
-            <SubMenu :menu="item.submenu"></SubMenu>
+            <MenuItem v-for="sub in item.submenu" :top="isTop" :key="sub.id" :item="sub">
+            </MenuItem>
         </div>
     </div>
 </template>
 
 <script>
 
-    import SubMenu from './SubMenu';
+    import MenuItem from './MenuItem';
 
     export default {
         name:"MenuItem",
-        props: ['item'],
-        components:{SubMenu},
+        props: ['item', 'top'],
+        components:{MenuItem},
         data:function(){
-            return{
-                show:false,
-            }
+            return {
+                isTop:false,
+                collapsed:false
+            };
         },
         methods:{
-            selectedMenu(){
-                if(this.$store.state.selectedMenu == this.item.id){
-                    this.$store.commit("selectedMenuChange", -1);
-                } else {
-                    this.$store.commit("selectedMenuChange", this.item.id);
-                }
+            collapseClick:function(){
+                this.collapsed = !this.collapsed;
             },
-            showTitle(){
-                this.show = true;
-            },
-            hideTitle(){
-                this.show = false;
+            selectedItem:function(){
+                this.$store.commit("selectedMenuChange", this.item.id);
             }
         },
         computed:{
+            collapse(){
+                return this.collapsed? "fa-angle-up":"fa-angle-down"
+            },
             selected(){
                 return this.$store.state.selectedMenu == this.item.id;
-            },
-            bflod(){
-                return this.$store.state.bflod;
-            },
-            titleWidth(){
-                if(this.$store.state.bflod && 
-                    (this.show || this.$store.state.selectedMenu == this.item.id)){
-                    return "120px";
-                } else if(this.$store.state.bflod){
-                    return "46px";
-                } else {
-                    return "100%";
-                }
-            },
-            itemHeight(){
-                if(this.$store.state.bflod){
-                    return "40px";
-                } else {
-                    return "auto";
-                }
             }
         }
     }
 </script>
 
 <style>
-    .lv-menu-item.lv-flod > .lv-menu-content{
-        display:none;
-    }
-
-    .lv-menu-title{
+    .lv-menu > .lv-menu-item > .lv-menu-title {
+        font-size:30px;
+        color:white;
         height:40px;
+        width:100%;
         line-height:40px;
         vertical-align:middle;
-        font-size:25px;
-        color:white;
     }
 
-    .lv-menu-highlight, .lv-menu-icon, .lv-menu-text{
+    .lv-menu > .lv-menu-item > .lv-menu-title:hover{
+        background-color:red !important;
+    }
+    
+    .lv-menu > .lv-menu-item > .lv-menu-title > .lv-menu-highlight, 
+    .lv-menu > .lv-menu-item > .lv-menu-title > .lv-menu-icon, 
+    .lv-menu > .lv-menu-item > .lv-menu-title > .lv-menu-text,
+    .lv-menu > .lv-menu-item > .lv-menu-title > .lv-menu-collapse{
         display:inline-block;
+        height:40px;
     }
 
-    .lv-menu-highlight{
-        height:40px;
+    .lv-menu > .lv-menu-item > .lv-menu-title > .lv-menu-highlight{
         width:3px;
         float:left;
     }
 
-    .lv-menu-icon{
+    .lv-menu > .lv-menu-item > .lv-menu-title > .lv-menu-icon{
         width:40px;
+        float:left;
+        line-height:40px;
+        vertical-align:middle;
         text-align:center;
     }
-    
+
+    .lv-menu > .lv-menu-item > .lv-menu-title > .lv-menu-collapse{
+        width:40px;
+        float:right;
+        line-height:40px;
+        vertical-align:middle;
+        text-align:center;
+    }
 </style>

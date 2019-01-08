@@ -1,6 +1,6 @@
 <template>
     <div class="lv-menu" :class="skin">
-        <MenuItem v-for="item in items" :key="item.Name" :item="item"></MenuItem>
+        <MenuItem v-for="item in items" :key="item.id" :top="isTop" :item="item"></MenuItem>
     </div>
 </template>
 
@@ -13,11 +13,24 @@
         props: ["skin"],
         data:function(){
             return{
+                isTop:true,
                 items:[
                     {id:1, name: "aa", clazz:"fa fa-cog", submenu:[
-                        {id:4, name: "aa1", clazz:"fa fa-cog"},
-                        {id:5, name: "aa2", clazz:"fa fa-cog"},
-                        {id:6, name: "aa3", clazz:"fa fa-cog"},
+                        {id:4, name: "aa1", clazz:"fa fa-cog", submenu:[
+                            {id:4, name: "aa11"},
+                            {id:5, name: "aa12"},
+                            {id:6, name: "aa13"}
+                        ]},
+                        {id:5, name: "aa2", clazz:"fa fa-cog", submenu:[
+                            {id:4, name: "aa21"},
+                            {id:5, name: "aa22"},
+                            {id:6, name: "aa23"}
+                        ]},
+                        {id:6, name: "aa3", clazz:"fa fa-cog", submenu:[
+                            {id:4, name: "aa31"},
+                            {id:5, name: "aa32"},
+                            {id:6, name: "aa33"}
+                        ]},
                     ]},
                     {id:2, name: "bb", clazz:"fa fa-user-circle", submenu:[
                         {id:7, name: "bb1", clazz:"fa fa-cog"},
