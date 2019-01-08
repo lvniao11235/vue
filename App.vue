@@ -76,7 +76,7 @@ export default {
   }
 
   .lv-layout-head.skin-blue,
-  .skin-blue .lv-menu-title.selected .lv-menu-highlight{
+  .skin-blue .lv-menu-item.selected .lv-menu-highlight{
     background-color:#3c8dbc;
   }
 
@@ -90,10 +90,8 @@ export default {
   }
 
   .lv-menu.skin-blue .lv-menu-content,
-  .lv-menu.skin-blue .lv-submenu,
-  .lv-menu.skin-blue .lv-menu-item.lv-flod.selected > .lv-menu-content > .lv-submenu,
-  .lv-menu.skin-blue .lv-menu-item.lv-flod.lv-show > .lv-menu-content > .lv-submenu{
-    background-color:#2c3b41;
+  .lv-submenu-item > .lv-menu-title{
+    background-color:#2c3b41 !important;
   }
 
 </style>
